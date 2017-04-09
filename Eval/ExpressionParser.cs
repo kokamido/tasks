@@ -171,7 +171,7 @@ namespace EvalTask
                         AddOperatorToTokens(TokenType.SecondaryOperator, str[i].ToString(), t);
                         l = i + 1;
                     }
-                }
+                
                 if (str[i] == '(')
                     {
                         AddOperatorToTokens(TokenType.OpenBracket, "(", t);
@@ -183,7 +183,8 @@ namespace EvalTask
                         AddOperatorToTokens(TokenType.CloseBracket, ")", t);
                         l = i + 1;
                     }
-                
+                }
+
             }
             if (l <= str.Length - 1)
             {
