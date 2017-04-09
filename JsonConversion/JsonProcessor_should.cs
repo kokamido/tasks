@@ -13,8 +13,8 @@ namespace JsonConversion
         [Test]
         public void ReturnDictionary_WhenArgIsJson()
         {
-            var res = JsonProcessor.GetConstantDictionaryFromEval2Json(@"{a:2,b:3,A:4}");
-            Assert.That(res, Is.EqualTo(new Dictionary<string, int>(){ { "a",2},{ "b",3},{ "A",4}}));
+            var res = JsonProcessor.GetConstantDictionaryFromEval2Json(@"{a:2,b:4}");
+            Assert.That(res, Is.EqualTo(new Dictionary<string, int>(){ { "a",2},{ "b",4}}));
         }
     }
 }

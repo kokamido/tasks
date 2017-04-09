@@ -82,9 +82,10 @@ namespace JsonConversion
 	    {
 	        foreach (var pair in constatnsVals.OrderByDescending((x)=>x.Key.Length))
 	        {
-                sourceExp = ExpressionParser.GetExpression(sourceExp.Replace(pair.Key, pair.Value.ToString()).Replace(".",",").Replace(" ", "")).ToString();
+	            Console.WriteLine(sourceExp.Replace(pair.Key, pair.Value.ToString()).Replace(".", ",").Replace(" ", ""));
+                sourceExp = sourceExp.Replace(pair.Key, pair.Value.ToString()).Replace(".",",").Replace(" ", "");
 	        }
-	        return sourceExp;
+	        return ExpressionParser.GetExpression(sourceExp).ToString();
 	    }
 
 
