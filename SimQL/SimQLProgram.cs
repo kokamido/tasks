@@ -61,7 +61,7 @@ namespace SimQLTask
 			var jObject = JObject.Parse(json);
 			var data = (JObject)jObject["data"];
 			var queries = jObject["queries"].ToObject<string[]>();
-			return queries.Select(q => $"{q} {WEfyhjj(q, data)}");
+			return queries.Select(q => $"{q}{WEfyhjj(q, data)}");
 		}
 
         public static string WEfyhjj(string path, JObject data)
@@ -119,7 +119,7 @@ namespace SimQLTask
                 return "";
             }
             
-            return $"= {((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+            return $" = {((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture)}";
         }
 
 	    public static bool IsValidInput(string input)
