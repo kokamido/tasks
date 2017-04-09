@@ -125,20 +125,9 @@ namespace JsonConversion
         [Test]
         public void WorkCorrectly_WithJson2Task()
         {
-            var res = JsonProgram.ConvertJson(@"
-{
-    ""version"": ""2"",
-    ""constants"": { ""a"": 3, ""b"": 4 },
-    ""products"": {
-        ""1"": {
-            ""name"": ""product - name"",
-		    ""price"": ""3 + a + b"",
-		    ""count"": 100,
-		}
-    }
-}"
+            var res = JsonProgram.ConvertJson(@"{""version"":""2"",""constants"":{""pi"":3.14},""products"":{""1"":{""name"":""product-name"",""price"":""12.3 * pi + pi + 4"",""count"":100}}}"
            );
-            Console.WriteLine(JObject.Parse(res));
+            //onsole.WriteLine(JObject.Parse(@"{ ""version"":""2"",""constants"":{ ""pi"":3.14},""products"":{ ""1"":{ ""name"":""product - name"",""price"":""12.3 * pi + pi + 4"",""count"":100} } }"));
             Assert.That(CleanFormatting(res), Is.EqualTo(CleanFormatting(@"
 {
     ""version"": ""3"",
