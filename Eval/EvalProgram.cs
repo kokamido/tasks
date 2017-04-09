@@ -7,9 +7,9 @@ namespace EvalTask
 	{
 		static void Main(string[] args)
 		{
-            //string input = Console.In.ReadToEnd();
-		    var input = "2+2*2";
-            input = input.Replace(" ", "").Replace("\token", "").Replace(".", ",");
+            string input = Console.ReadLine();
+		    //var input = " 5+";
+            input = input.Replace(" ", "").Replace("\t", "").Replace(".", ",");
             var res = ExpressionParser.GetExpression(input);
             Console.WriteLine(res);
 		}
