@@ -61,34 +61,35 @@ namespace SimQLTask
 			var jObject = JObject.Parse(json);
 			var data = (JObject)jObject["data"];
 			var queries = jObject["queries"].ToObject<string[]>();
-			return queries.Select(q => $"{q}{WEfyhjj(q, data)}");
+			return queries.Select(q => $"{q}{GetValueOrEmptyStringIfNotExist(q, data)}");
 		}
 
-        public static string WEfyhjj(string path, JObject data)
+        /*public static string GetValueOrEmptyStringIfNotExist(string path, JObject data)
+        {
+            //data = JsonConvert<Dictionary<string, object>>(JsonConvert.SerializeObject(data));
+            var dictionaryData = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(data));
+            var splittedPath = path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            double? value = null;
+            
+            for (int i = 0; i < splittedPath.Length; i++)
+            {
+                var property = dictionaryData[splittedPath[i]];
+            }
+            if (value == null)
+            {
+                return "";
+            }
+            
+            return $" = {((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+        }*/
+
+        public static string GetValueOrEmptyStringIfNotExist(string path, JObject data)
         {
             data = JObject.Parse(JsonConvert.SerializeObject(data));
-            
+
             var splittedPath = path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             JToken jToken;
             double? value = null;
-            /*foreach (var property in splittedPath)
-            {
-
-                bool isTryingSuccessful = data.TryGetValue(property, out jToken);
-                if (!isTryingSuccessful)
-                {
-                    return "";
-                }
-                try
-                {
-                    
-                    data = (JObject)jToken;
-                }
-                catch (Exception ex)
-                {
-                    value = (double)jToken;
-                }
-            }*/
             for (int i = 0; i < splittedPath.Length; i++)
             {
                 var property = splittedPath[i];
@@ -97,12 +98,8 @@ namespace SimQLTask
                 {
                     return "";
                 }
-                try
-                {
-
-                    data = (JObject)jToken;
-                }
-                catch (Exception ex)
+                    data = jToken as JObject;
+                if(data == null)
                 {
                     if (i == splittedPath.Length - 1)
                     {
@@ -118,11 +115,11 @@ namespace SimQLTask
             {
                 return "";
             }
-            
+
             return $" = {((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture)}";
         }
 
-	    public static bool IsValidInput(string input)
+        public static bool IsValidInput(string input)
 	    {
 	        try
 	        {
