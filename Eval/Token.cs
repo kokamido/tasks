@@ -10,7 +10,9 @@ namespace EvalTask
     {
         Value,
         PrimaryOperator,
-        SecondaryOperator
+        SecondaryOperator,
+        OpenBracket,
+        CloseBracket
     }
     public class Token
     {

@@ -8,9 +8,9 @@ namespace EvalTask
 		static void Main(string[] args)
 		{
             string input = Console.In.ReadToEnd();
-            input = input.Replace(" ", "").Replace("\t", "").Replace(".", ",");
+            input = input.Replace(" ", "").Replace("\token", "").Replace(".", ",");
             var res = ExpressionParser.GetExpression(input);
-            Console.WriteLine(res);           
+            Console.WriteLine(res);
 		}
 	}
 }
