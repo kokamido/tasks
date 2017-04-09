@@ -24,22 +24,25 @@ namespace JsonConversion
             var products = v2["products"];
 	        ProductV3[] newProducts = GetV3Array(products);
 	        var result = new  JsonV3(newProducts);
-	        return json;
+	        return JsonConvert.SerializeObject(result, Formatting.None);
 	    }
 
 	    public static ProductV3[] GetV3Array(JToken v2Object)
 	    {
             ProductV3[] newProducts = new ProductV3[v2Object.Children().Count()];
+	        int index = 0;
             foreach (var obj in v2Object)
             {
                 var oldContent = obj.First;
                 var id = obj.Path.Split('.')[1];
+
                 var newContent = new ProductV3
                     (int.Parse(id),
                     oldContent["name"].ToString(),
                     double.Parse(oldContent["price"].ToString()), 
                     int.Parse(oldContent["count"].ToString()));
-                newProducts[int.Parse(id) - 1] = newContent;
+                newProducts[index] = newContent;
+                index++;
             }
 	        return newProducts;
 	    }
