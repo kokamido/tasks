@@ -12,9 +12,23 @@ namespace SimQLTask
 		static void Main(string[] args)
 		{
             /*TestMain();*/
+
             var json = Console.In.ReadToEnd();
-            foreach (var result in ExecuteQueries(json))
-                Console.WriteLine(result);
+		    if (IsValidInput(json))
+		    {
+                Console.WriteLine("Неверный ввод");
+                return;
+		    }
+		    try
+		    {
+                foreach (var result in ExecuteQueries(json))
+                    Console.WriteLine(result);
+            }
+		    catch (Exception e)
+		    {
+		        Console.WriteLine(e);
+		        throw;
+		    }
 
         }
 
@@ -40,13 +54,14 @@ namespace SimQLTask
             Console.ReadKey();
         }
 
-		public static IEnumerable<string> ExecuteQueries(string json)
+
+
+        public static IEnumerable<string> ExecuteQueries(string json)
 		{
 			var jObject = JObject.Parse(json);
 			var data = (JObject)jObject["data"];
 			var queries = jObject["queries"].ToObject<string[]>();
-			// TODO
-			return queries.Select(q => $"{q} = {WEfyhjj(q, data)}");
+			return queries.Select(q => $"{q} {WEfyhjj(q, data)}");
 		}
 
         public static string WEfyhjj(string path, JObject data)
@@ -103,7 +118,21 @@ namespace SimQLTask
             {
                 return "";
             }
-            return ((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            
+            return $"= {((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture)}";
         }
+
+	    public static bool IsValidInput(string input)
+	    {
+	        try
+	        {
+                JObject.Parse("2*-3");
+            }
+	        catch (Exception)
+	        {
+	            return false;
+	        }
+	        return true;
+	    }
 	}
 }
