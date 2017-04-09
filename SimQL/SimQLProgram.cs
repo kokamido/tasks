@@ -55,25 +55,55 @@ namespace SimQLTask
             
             var splittedPath = path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             JToken jToken;
-            double value = 0;
-            foreach (var property in splittedPath)
+            double? value = null;
+            /*foreach (var property in splittedPath)
             {
 
                 bool isTryingSuccessful = data.TryGetValue(property, out jToken);
                 if (!isTryingSuccessful)
                 {
-                    throw new Exception("No field");
+                    return "";
                 }
                 try
                 {
+                    
                     data = (JObject)jToken;
                 }
                 catch (Exception ex)
                 {
                     value = (double)jToken;
                 }
+            }*/
+            for (int i = 0; i < splittedPath.Length; i++)
+            {
+                var property = splittedPath[i];
+                bool isTryingSuccessful = data.TryGetValue(property, out jToken);
+                if (!isTryingSuccessful)
+                {
+                    return "";
+                }
+                try
+                {
+
+                    data = (JObject)jToken;
+                }
+                catch (Exception ex)
+                {
+                    if (i == splittedPath.Length - 1)
+                    {
+                        value = (double)jToken;
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
             }
-            return value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            if (value == null)
+            {
+                return "";
+            }
+            return ((double)value).ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 	}
 }
