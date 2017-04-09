@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonConverter_Should.cs" />
+    <Compile Include="JsonProcessor.cs" />
+    <Compile Include="JsonProcessor_should.cs" />
     <Compile Include="JsonProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
