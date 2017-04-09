@@ -88,7 +88,6 @@ namespace EvalTask
                 {
                     while (true)
                     {
-
                         var tokenFromStack = tokenStack.Pop();
                         if (tokenFromStack.type != TokenType.OpenBracket)
                         {
@@ -161,17 +160,18 @@ namespace EvalTask
                 {
                     if (str[i].IsPrimaryOperator())
                     {
-                        t.Add(new Token() { type = TokenType.Value, value = str.Substring(l, i - l) });
+                        t.Add(new Token() {type = TokenType.Value, value = str.Substring(l, i - l)});
                         AddOperatorToTokens(TokenType.PrimaryOperator, str[i].ToString(), t);
                         l = i + 1;
                     }
-                    if (str[i].IsSecondaryOperator() && !(str[i - 1].IsSecondaryOperator() || str[i - 1].IsPrimaryOperator()))
+                    if (str[i].IsSecondaryOperator() && !(str[i - 1].IsSecondaryOperator() ||
+                                                          str[i - 1].IsPrimaryOperator()))
                     {
-                        t.Add(new Token() { type = TokenType.Value, value = str.Substring(l, i - l) });
+                        t.Add(new Token() {type = TokenType.Value, value = str.Substring(l, i - l)});
                         AddOperatorToTokens(TokenType.SecondaryOperator, str[i].ToString(), t);
                         l = i + 1;
                     }
-                
+                }
                 if (str[i] == '(')
                     {
                         AddOperatorToTokens(TokenType.OpenBracket, "(", t);
@@ -183,8 +183,6 @@ namespace EvalTask
                         AddOperatorToTokens(TokenType.CloseBracket, ")", t);
                         l = i + 1;
                     }
-                }
-
             }
             if (l <= str.Length - 1)
             {
