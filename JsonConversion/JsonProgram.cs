@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using EvalTask;
 using Newtonsoft.Json;
 
 namespace JsonConversion
@@ -81,7 +82,7 @@ namespace JsonConversion
 	    {
 	        foreach (var pair in constatnsVals.OrderByDescending((x)=>x.Key.Length))
 	        {
-	            sourceExp = sourceExp.Replace(pair.Key, pair.Value.ToString());
+                sourceExp = ExpressionParser.GetExpression(sourceExp.Replace(pair.Key, pair.Value.ToString()).Replace(".",",").Replace(" ", "")).ToString();
 	        }
 	        return sourceExp;
 	    }
