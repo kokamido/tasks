@@ -29,7 +29,7 @@ namespace EvalTask
                         AddOperatorToTokens(TokenType.PrimaryOperator, str[i].ToString());
                         l = i + 1;
                     }
-                    if (str[i].IsSecondaryOperator())
+                    if (str[i].IsSecondaryOperator() && !(str[i-1].IsSecondaryOperator() || str[i - 1].IsPrimaryOperator()))
                     {
                         Tokens.Add(new Token() { type = TokenType.Value, value = str.Substring(l, i - l) });
                         AddOperatorToTokens(TokenType.SecondaryOperator, str[i].ToString());
