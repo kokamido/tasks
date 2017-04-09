@@ -183,7 +183,7 @@ namespace EvalTask
                     }
                 }
             }
-            if (l < str.Length - 1)
+            if (l <= str.Length - 1)
             {
                 t.Add(new Token() {type = TokenType.Value, value = str.Substring(l, str.Length - l)});
             }
