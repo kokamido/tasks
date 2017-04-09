@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace EvalTask
 {
@@ -6,9 +7,9 @@ namespace EvalTask
 	{
 		static void Main(string[] args)
 		{
-			string input = Console.In.ReadToEnd();
-			string output = "TODO";
-			Console.WriteLine(output);
+		    string input = Console.In.ReadToEnd();
+		    var res = ExpressionParser.GetExpression(input);
+            Console.WriteLine(res);           
 		}
 	}
 }
