@@ -11,10 +11,10 @@ namespace SimQLTask
 	{
 		static void Main(string[] args)
 		{
-            TestMain();
-            /*var json = Console.In.ReadToEnd();
+            /*TestMain();*/
+            var json = Console.In.ReadToEnd();
             foreach (var result in ExecuteQueries(json))
-                Console.WriteLine(result);*/
+                Console.WriteLine(result);
 
         }
 
